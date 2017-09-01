@@ -1,0 +1,87 @@
+/*重置部分样式*/
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Microsoft Yahei", "微软雅黑", PingFangSC, "Hiragino Sans GB", "Hiragino Sans GB W3", Tahoma, STHeiti,  sans-serif;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  font-size: 100px;
+  height: 100%;
+}
+
+body {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 0.14rem;
+  height: 100%;
+}
+
+ul, li {
+  list-style: none;
+}
+
+img {
+  border: 0;
+  vertical-align: middle;
+}
+
+a {
+  text-decoration: none;
+}
+
+input, textarea {
+  border: 0;
+  vertical-align: middle;
+  outline: none;
+  padding: 10px;
+}
+
+
+::-webkit-input-placeholder {
+  color: #b8b8b8;
+}
+
+
+/*====================手机适配=========================*/
+/* iphone4 */
+@media (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 2) {
+  html {
+    font-size: 96px !important
+  }
+}
+
+
+/* iphone5 */
+@media (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-device-pixel-ratio: 2) {
+  html {
+    font-size: 96px !important
+  }
+}
+
+
+/* iphone 6,7 */
+@media (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-device-pixel-ratio: 2) {
+  html {
+    font-size: 100px !important
+  }
+}
+
+
+/* iphone 6,7 plus*/
+@media (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-device-pixel-ratio: 3) {
+  html {
+    font-size: 110px !important
+  }
+}
+
+
+/* 特殊安卓*/
+@media (min-device-height: 737px) and (-webkit-device-pixel-ratio: 3) {
+  html {
+    font-size: 100px !important
+  }
+}
