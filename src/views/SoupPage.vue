@@ -28,7 +28,7 @@
 
   export default {
     name: 'soup-page',
-    data() {
+    data () {
       return {
         soupList: [], // 鸡汤列表
         soupIdList: [], // 鸡汤id列表
@@ -45,14 +45,15 @@
       CoverImage,
       BScroll
     },
-    created() {
+    created () {
       this.$vux.loading.show({
         text: '数据载入中...'
       })
       this.getSoupList()
     },
     methods: {
-      getSoupList(soupId = 0) {
+      getSoupList (soupId = 0) {
+        this.$store.commit('setLoadState', true) // 正在加载
         this.$http.get(`${api.getSoupList}${soupId}`) // 获取鸡汤id列表
           .then((data) => {
             let tempIdList = Vue.filter('axiosRespFilter')(data)
@@ -60,14 +61,15 @@
             return this.$http.all(tempIdList.map(this.getSoupDetail)) // 根据列表获取鸡汤详情
           })
           .then((data) => {
+            this.$store.commit('setLoadState', false)
             this.$vux.loading.hide()
             if (soupId != 0) {
               this.$refs.scroll.forceUpdate()
             }
             this.soupList.push(...Vue.filter('axiosRespFilter')(data))
-            this.$store.commit('setDrawerImage', this.soupList[0].hp_img_url) // 设置drawer图片
           })
           .catch(() => {
+            this.$store.commit('setLoadState', false)
             this.$vux.loading.hide()
             if (soupId != 0) {
               this.$refs.scroll.forceUpdate()
@@ -75,11 +77,11 @@
             this.$vux.toast.text('数据载入失败', 'middle')
           })
       },
-      getSoupDetail(soupId) { // 获取鸡汤详情
+      getSoupDetail (soupId) { // 获取鸡汤详情
         return this.$http.get(`${api.getSoupDetail}${soupId}`)
       },
-      onPullingUp() { // 触发上拉动作时
-        this.getSoupList(this.soupIdList[this.soupIdList.length - 1]) // 获取更多数据
+      onPullingUp () { // 触发上拉动作时
+        return (!this.$store.state.isLoading) && this.getSoupList(this.soupIdList[this.soupIdList.length - 1]) // 获取更多数据
       }
     }
   }

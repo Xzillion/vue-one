@@ -27,11 +27,12 @@
           class="header"
           :left-options="leftOptions"
           :right-options="rightOptions"
-          :title="title"
           :transition="headerTransition"
+          :style="headerStyle"
         >
+          <span :style="headerStyle">{{title}}</span>
           <span slot="overwrite-left" @click="showDrawer = !showDrawer">
-            <x-icon type="navicon" class="nav-icon" size="35"></x-icon>
+            <x-icon type="navicon" class="nav-icon" size="35" :style="headerStyle"></x-icon>
           </span>
         </x-header>
         <router-view></router-view>
@@ -44,6 +45,7 @@
   import {Drawer, XHeader, ViewBox} from 'vux'
   import CoverImage from '../components/CoverImage'
   import BScroll from '../components/BScroll'
+  import {mapState} from 'vuex'
 
   export default {
     name: 'home',
@@ -53,6 +55,9 @@
       XHeader,
       ViewBox,
       BScroll
+    },
+    created () {
+      this.$store.dispatch('initSwatch') // 发出初始化swatch请求
     },
     data () {
       return {
@@ -89,9 +94,16 @@
       }
     },
     computed: {
-      drawerImg () {
-        return this.$store.state.home.drawerImg
-      }
+      ...mapState({
+        drawerImg: state => state.home.drawerImg,
+        headerStyle: state => {
+          return {
+            backgroundColor: state.swatchColor,
+            color: state.titleTextColor + '!important',
+            fill: state.titleTextColor
+          }
+        }
+      })
     }
   }
 </script>
@@ -103,7 +115,6 @@
     .header {
       width: 100%;
       position: absolute;
-      background: #000;
       left: 0;
       top: 0;
       z-index: 100;

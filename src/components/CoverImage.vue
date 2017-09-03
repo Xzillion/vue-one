@@ -7,14 +7,14 @@
     name: 'cover-image',
     props: {
       imgSource: {
+        type: String,
         default: ''
       }
     },
     computed: {
       imageStyle () {
         return {
-          backgroundImage: `url(${this.imgSource})`, // 如果将props属性放入data中使用 则父组件更新props值的时候不会触发子组件更新
-          backgroundSize: 'cover'
+          backgroundImage: `url(${this.imgSource})`// 如果将props属性放入data中使用 则父组件更新props值的时候不会触发子组件更新
         }
       }
     }
@@ -25,5 +25,6 @@
   .cover-image {
     width: 100%;
     height: 100%;
+    background-size: cover;
   }
 </style>

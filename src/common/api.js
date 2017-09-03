@@ -21,6 +21,7 @@
 const BASE_URL = 'http://v3.wufazhuce.com:8000/api/'
 let api = {
   // 鸡汤相关
+  getTodaySoup: `${BASE_URL}hp/detail/0`, // 获取今日鸡汤
   getSoupList: `${BASE_URL}hp/idlist/`, // 获取鸡汤列表
   getSoupDetail: `${BASE_URL}hp/detail/`, // 获取鸡汤详情
   // 文章相关
