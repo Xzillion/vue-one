@@ -17,6 +17,11 @@ const routes = [
         name: 'soup',
         path: 'soup',
         component: (resolved) => require(['../views/SoupPage.vue'], resolved)
+      },
+      {
+        name: 'article',
+        path: 'article',
+        component: (resolved) => require(['../views/ArticlePage.vue'], resolved)
       }
     ]
   }

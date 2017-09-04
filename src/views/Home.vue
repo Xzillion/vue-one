@@ -14,9 +14,10 @@
           :data="menuList"
         >
           <ul class="menu-list" slot="scroll-content">
-            <li class="menu-item" :class="{'active':item.active}" v-for="(item, index) in menuList" :key="index" @click="">
+            <router-link class="menu-item" :to="item.link" active-class="active" v-for="(item, index) in menuList"
+                         :key="index" @click.native="changeRoute(item.title)" tag="li">
               <i :class="item.icon"></i><span class="title">{{item.title}}</span>
-            </li>
+            </router-link>
           </ul>
         </b-scroll>
       </div>
@@ -30,7 +31,7 @@
           :transition="headerTransition"
           :style="headerStyle"
         >
-          <span :style="headerStyle">{{title}}</span>
+          <span :style="headerStyle">{{headerTitle}}</span>
           <span slot="overwrite-left" @click="showDrawer = !showDrawer">
             <x-icon type="navicon" class="nav-icon" size="35" :style="headerStyle"></x-icon>
           </span>
@@ -45,7 +46,7 @@
   import {Drawer, XHeader, ViewBox} from 'vux'
   import CoverImage from '../components/CoverImage'
   import BScroll from '../components/BScroll'
-  import {mapState} from 'vuex'
+  import {mapState, mapMutations, mapActions} from 'vuex'
 
   export default {
     name: 'home',
@@ -56,12 +57,11 @@
       ViewBox,
       BScroll
     },
-    created () {
+    created() {
       this.$store.dispatch('initSwatch') // 发出初始化swatch请求
     },
-    data () {
+    data() {
       return {
-        showDrawer: false,
         leftOptions: {
           showBack: false,
           backText: ''
@@ -69,29 +69,38 @@
         rightOptions: {
           showMore: false
         },
-        title: '首页',
+        headerTitle: '鸡汤', // 顶栏标题
         headerTransition: 'vux-header-fade-in-left',
         drawerStyle: {
           backgroundColor: '#fff',
           width: '2.5rem'
         },
+        showDrawer: false, // 是否打开drawer
         menuList: [
           {
             icon: 'iconfont icon-heart',
             title: '鸡汤',
-            active: true
+            link: '/home/soup'
           },
           {
             icon: 'iconfont icon-articles',
-            title: '文章'
+            title: '文章',
+            link: '/home/article'
           },
           {
             icon: 'iconfont icon-movie',
-            title: '电影'
+            title: '电影',
+            link: '/home/movie'
           }
 
         ]
       }
+    },
+    methods: { // 事件
+     changeRoute (headerTitle = '鸡汤') {
+        this.headerTitle = headerTitle
+        this.showDrawer = !this.showDrawer
+     }
     },
     computed: {
       ...mapState({
