@@ -10,6 +10,7 @@ const store = {
   state: { // 组件状态
     isLoading: false, // 是否正在加载数据
     swatchColor: '#000', // 主色
+    headerTitle: '', // 顶栏标题
     titleTextColor: '#fff', // 标题栏文字颜色
     bodyTextColor: '#fff', // 主体文字颜色
     home: { // 首页相关
@@ -22,6 +23,9 @@ const store = {
     },
     setLoadState (state, loadState) {
       state.isLoading = loadState
+    },
+    setHeaderTitle (state, headerTitle) {
+      state.headerTitle = headerTitle
     },
     setSwatchColor (state, swatchColor) {
       state.swatchColor = swatchColor

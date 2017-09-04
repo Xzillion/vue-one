@@ -9,7 +9,7 @@
   文章
    获取前十期文章列表 	http://v3.wufazhuce.com:8000/api/reading/index 包含近十期的文章 问题 长篇连载 的id
    获取某月的文章列表      http://v3.wufazhuce.com:8000/api/essay/bymonth/yyyy-mm-01 id 标题 简介 作者 头像
-   获取某期文章详情	http://v3.wufazhuce.com:8000/api/essay/id
+   获取某期文章详情	    http://v3.wufazhuce.com:8000/api/essay/id
    获取以index为基准的五期 http://v3.wufazhuce.com:8000/api/reading/index/20 index/0 为最近一到五期 递加类推 1：六到十期 。。。。文章 问题 长篇连载 列表
  电影
   获取最新前20期电影		http://v3.wufazhuce.com:8000/api/movie/list/0
@@ -25,7 +25,8 @@ let api = {
   getSoupList: `${BASE_URL}hp/idlist/`, // 获取鸡汤列表
   getSoupDetail: `${BASE_URL}hp/detail/`, // 获取鸡汤详情
   // 文章相关
-  getArticleList: `${BASE_URL}reading/index/`, // 获取文章列表
+  getArticleList: `${BASE_URL}essay/bymonth/`, // 获取某月文章列表
+  getArticleDetail: `${BASE_URL}essay/`, // 获取某期文章详情
   // 电影相关
   getMovieList: `${BASE_URL}movie/list/`
 }

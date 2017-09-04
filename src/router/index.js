@@ -1,7 +1,6 @@
 // 路由配置
 import Vue from 'vue'
 import Router from 'vue-router'
-
 Vue.use(Router)
 
 const routes = [
@@ -16,12 +15,12 @@ const routes = [
       {
         name: 'soup',
         path: 'soup',
-        component: (resolved) => require(['../views/SoupPage.vue'], resolved)
+        component: (resolved) => require(['../views/soup/SoupPage.vue'], resolved)
       },
       {
         name: 'article',
         path: 'article',
-        component: (resolved) => require(['../views/ArticlePage.vue'], resolved)
+        component: (resolved) => require(['../views/article/ArticlePage.vue'], resolved)
       }
     ]
   }

@@ -69,7 +69,6 @@
         rightOptions: {
           showMore: false
         },
-        headerTitle: '鸡汤', // 顶栏标题
         headerTransition: 'vux-header-fade-in-left',
         drawerStyle: {
           backgroundColor: '#fff',
@@ -97,8 +96,7 @@
       }
     },
     methods: { // 事件
-     changeRoute (headerTitle = '鸡汤') {
-        this.headerTitle = headerTitle
+     changeRoute () {
         this.showDrawer = !this.showDrawer
      }
     },
@@ -111,7 +109,8 @@
             color: state.titleTextColor + '!important',
             fill: state.titleTextColor
           }
-        }
+        },
+        headerTitle: state => state.headerTitle
       })
     }
   }

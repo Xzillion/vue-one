@@ -21,10 +21,11 @@
 </template>
 
 <script type="es6">
-  import BScroll from '../components/BScroll.vue'
-  import CoverImage from '../components/CoverImage.vue'
-  import api from '../common/api'
+  import BScroll from '../../components/BScroll.vue'
+  import CoverImage from '../../components/CoverImage.vue'
+  import api from '../../common/api'
   import Vue from 'vue'
+  import {mapState, mapMutations} from 'vuex'
 
   export default {
     name: 'soup-page',
@@ -39,6 +40,7 @@
             noMore: '没有更多数据'
           }
         },
+        headerTitle: '鸡汤'
       }
     },
     components: {
@@ -49,6 +51,7 @@
       this.$vux.loading.show({
         text: '数据载入中...'
       })
+      this.setHeaderTitle(this.headerTitle)
       this.getSoupList()
     },
     methods: {
@@ -82,7 +85,10 @@
       },
       onPullingUp () { // 触发上拉动作时
         return (!this.$store.state.isLoading) && this.getSoupList(this.soupIdList[this.soupIdList.length - 1]) // 获取更多数据
-      }
+      },
+      ...mapMutations([
+        'setHeaderTitle'
+      ])
     }
   }
 </script>
