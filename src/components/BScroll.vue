@@ -143,7 +143,7 @@
 
         let options = {
           probeType: this.probeType,
-          click: this.click,
+          click: true,
           scrollY: this.direction === DIRECTION_V,
           scrollX: this.direction === DIRECTION_H,
           scrollbar: this.scrollbar,

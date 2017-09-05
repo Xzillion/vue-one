@@ -10,6 +10,7 @@ const routes = [
   },
   {
     path: '/home',
+    redirect: '/home/soup',
     component: (resolved) => require(['../views/Home.vue'], resolved), // 按需加载页面文件
     children: [ // 子路由
       {

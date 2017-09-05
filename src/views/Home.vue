@@ -12,6 +12,7 @@
         <b-scroll
           class="menu-wrapper"
           :data="menuList"
+          :click="true"
         >
           <ul class="menu-list" slot="scroll-content">
             <router-link class="menu-item" :to="item.link" active-class="active" v-for="(item, index) in menuList"

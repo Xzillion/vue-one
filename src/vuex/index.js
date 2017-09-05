@@ -21,8 +21,10 @@ const store = {
     setDrawerImage (state, imgUrl) {
       state.home.drawerImg = imgUrl
     },
-    setLoadState (state, loadState) {
-      state.isLoading = loadState
+    setLoadState (state, loadState, delay = 0) {
+      setTimeout(() => {
+        state.isLoading = loadState
+      }, delay)
     },
     setHeaderTitle (state, headerTitle) {
       state.headerTitle = headerTitle

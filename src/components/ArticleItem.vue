@@ -2,8 +2,10 @@
 <template>
   <div class="article-item">
     <img class="author-avatar" :src="authorAvatar"/><span class="author-name">{{authorName}}</span>
-    <label class="article-title">{{articleTitle}}</label>
-    <p class="article-abstract">{{articleAbstract}}</p>
+    <h1 class="article-title">{{articleTitle}}</h1>
+    <p class="left-symbol"><i class="iconfont icon-yinhao-left"></i></p>
+    <div class="article-abstract"><p class="center">{{articleAbstract}}</p></div>
+    <p class="right-symbol"><i class="iconfont icon-yinhao-right"></i></p>
   </div>
 </template>
 
@@ -34,11 +36,11 @@
     padding: .1rem;
     margin-bottom: .1rem;
     width: 100%;
-    height: 1.2rem;
+    // height: 1.5rem;
     background: @white-bgcolor;
     border: 1px solid @border-bgcolor;
     border-radius: .06rem;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 7px 28px rgba(0, 0, 0, 0.25), 0 5px 10px rgba(0, 0, 0, 0.22);
     overflow: hidden;
     .author-avatar {
       width: .4rem;
@@ -56,17 +58,32 @@
     }
     .article-title {
       display: block;
-      margin-top: .05rem;
+      margin: .1rem 0;
       max-width: 100%;
       color: @black-bgcolor;
       font-size: @large-font-size;
+      font-weight: normal;
       .overHide();
     }
     .article-abstract {
-      margin-top: .1rem;
+      padding: .05rem .15rem;
       color: @minor-font-color;
       font-size: @small-font-size;
-      .overHide();
+      text-align: center;
+      .center {
+        display: inline-block;
+        text-align: left;
+      }
+    }
+    .left-symbol {
+      text-align: left;
+    }
+    .right-symbol {
+      text-align: right;
+    }
+    .iconfont {
+      font-size: @small-font-size;
+      color: @tint-dark-color;
     }
   }
 </style>
