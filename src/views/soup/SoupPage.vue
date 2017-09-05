@@ -47,7 +47,7 @@
       CoverImage,
       BScroll
     },
-    created () {
+    mounted () {
       this.$vux.loading.show({
         text: '数据载入中...'
       })
@@ -57,11 +57,10 @@
     methods: {
       getSoupList (soupId = 0) {
         this.$store.commit('setLoadState', true) // 正在加载
-        this.$http.get(`${api.getSoupList}${soupId}`) // 获取鸡汤id列表
+        api.getSoupList(soupId) // 获取鸡汤id列表
           .then((data) => {
-            let tempIdList = Vue.filter('axiosRespFilter')(data)
-            this.soupIdList.push(...tempIdList)
-            return this.$http.all(tempIdList.map(this.getSoupDetail)) // 根据列表获取鸡汤详情
+            this.soupIdList.push(...data)
+            return this.$http.all(data.map(this.getSoupDetail)) // 根据列表获取鸡汤详情
           })
           .then((data) => {
             this.$store.commit('setLoadState', false)
@@ -69,7 +68,7 @@
             if (soupId != 0) {
               this.$refs.scroll.forceUpdate()
             }
-            this.soupList.push(...Vue.filter('axiosRespFilter')(data))
+            this.soupList.push(...data)
           })
           .catch(() => {
             this.$store.commit('setLoadState', false)
@@ -81,7 +80,7 @@
           })
       },
       getSoupDetail (soupId) { // 获取鸡汤详情
-        return this.$http.get(`${api.getSoupDetail}${soupId}`)
+        return api.getSoupDetail(soupId)
       },
       onPullingUp () { // 触发上拉动作时
         return (!this.$store.state.isLoading) && this.getSoupList(this.soupIdList[this.soupIdList.length - 1]) // 获取更多数据

@@ -3,7 +3,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import api from '../common/api'
 import util from '../common/utils'
-import axios from 'axios'
 Vue.use(Vuex)
 
 const store = {
@@ -21,7 +20,7 @@ const store = {
     setDrawerImage (state, imgUrl) {
       state.home.drawerImg = imgUrl
     },
-    setLoadState (state, loadState, delay = 0) {
+    setLoadState (state, {loadState, delay = 0}) {
       setTimeout(() => {
         state.isLoading = loadState
       }, delay)
@@ -41,11 +40,10 @@ const store = {
   },
   actions: { // 组件动作
     initSwatch ({commit}) { // 获取今日鸡汤图片初始化swatch
-      axios.get(`${api.getTodaySoup}`)
+      api.getSoupDetail()
         .then((data) => {
-          let todaySoupObj = Vue.filter('axiosRespFilter')(data)
-          commit('setDrawerImage', todaySoupObj.hp_img_url) // 设置drawer图片
-          return util.getImagePalette(todaySoupObj.hp_img_url)
+          commit('setDrawerImage', data.hp_img_url) // 设置drawer图片
+          return util.getImagePalette(data.hp_img_url)
         })
         .then((swatch) => {
           commit('setSwatchColor', swatch.getHex().toString())

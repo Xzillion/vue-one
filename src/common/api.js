@@ -18,16 +18,41 @@
   获取某期电影所有的评论故事 	http://v3.wufazhuce.com:8000/api/movie/id/story/0/0
   获取某期最佳评论故事	 http://v3.wufazhuce.com:8000/api/movie/id/story/1/0 */
 
+import axios from 'axios'
+import Vue from 'vue'
+import { dateFormat } from 'vux'
+
 const BASE_URL = 'http://v3.wufazhuce.com:8000/api/'
 let api = {
   // 鸡汤相关
-  getTodaySoup: `${BASE_URL}hp/detail/0`, // 获取今日鸡汤
-  getSoupList: `${BASE_URL}hp/idlist/`, // 获取鸡汤列表
-  getSoupDetail: `${BASE_URL}hp/detail/`, // 获取鸡汤详情
+  getSoupList: (id = 0) => {// 获取鸡汤列表
+    return api.requestHandler.get(`${BASE_URL}hp/idlist/${id}`)
+  },
+  getSoupDetail: (id = 0) => {// 获取鸡汤详情
+    return api.requestHandler.get(`${BASE_URL}hp/detail/${id}`)
+  },
   // 文章相关
-  getArticleList: `${BASE_URL}essay/bymonth/`, // 获取某月文章列表
-  getArticleDetail: `${BASE_URL}essay/`, // 获取某期文章详情
+  getArticleList: (date = new Date()) => { // 获取某月文章列表
+    return api.requestHandler.get(`${BASE_URL}essay/bymonth/${dateFormat(date, 'YYYY-MM')}`)
+  },
+  getArticleDetail: (id = 0) => { // 获取某期文章详情
+    return api.requestHandler.get(`${BASE_URL}essay/${id}`)
+  },
   // 电影相关
-  getMovieList: `${BASE_URL}movie/list/`
+  getMovieList: (id = 0) => { // 获取电影列表
+    return api.requestHandler.get(`${BASE_URL}movie/list/${id}`)
+  },
+  requestHandler: {
+      get: (url) => {
+        return axios.get(url)
+          .then((data) => {
+            return Promise.resolve(Vue.filter('axiosRespFilter')(data))
+          })
+          .catch((err) => {
+            return Promise.reject(err)
+          })
+      }
+  }
+
 }
 export default api
