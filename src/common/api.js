@@ -26,6 +26,7 @@ const BASE_URL = 'http://v3.wufazhuce.com:8000/api/'
 let api = {
   // 鸡汤相关
   getSoupList: (id = 0) => {// 获取鸡汤列表
+    console.log(this)
     return api.requestHandler.get(`${BASE_URL}hp/idlist/${id}`)
   },
   getSoupDetail: (id = 0) => {// 获取鸡汤详情
@@ -39,18 +40,19 @@ let api = {
     return api.requestHandler.get(`${BASE_URL}essay/${id}`)
   },
   // 电影相关
-  getMovieList: (id = 0) => { // 获取电影列表
-    return api.requestHandler.get(`${BASE_URL}movie/list/${id}`)
+  getMovieList: (id = 0) => { //
+
+    return this.requestHandler.get(`${BASE_URL}movie/list/${id}`)
   },
   requestHandler: {
       get: (url) => {
         return axios.get(url)
           .then((data) => {
-            return Promise.resolve(Vue.filter('axiosRespFilter')(data))
+            return Vue.filter('axiosRespFilter')(data) //Promise.resolve(Vue.filter('axiosRespFilter')(data))
           })
-          .catch((err) => {
+          /*.catch((err) => {
             return Promise.reject(err)
-          })
+          })*/
       }
   }
 

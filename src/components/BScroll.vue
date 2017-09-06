@@ -60,7 +60,9 @@
     props: {
       data: {
         type: Array,
-        default: []
+        default: function () {
+          return []
+        }
       },
       probeType: {
         type: Number,
@@ -101,6 +103,10 @@
       refreshDelay: {
         type: Number,
         default: 20
+      },
+      freeScroll: {
+        type: Boolean,
+        default: false
       }
     },
     data () {
@@ -143,13 +149,14 @@
 
         let options = {
           probeType: this.probeType,
-          click: true,
-          scrollY: this.direction === DIRECTION_V,
-          scrollX: this.direction === DIRECTION_H,
+          click: this.click,
+          scrollY: this.freeScroll || this.direction === DIRECTION_V,
+          scrollX: this.freeScroll || this.direction === DIRECTION_H,
           scrollbar: this.scrollbar,
           pullDownRefresh: this.pullDownRefresh,
           pullUpLoad: this.pullUpLoad,
-          startY: this.startY
+          startY: this.startY,
+          freeScroll: this.freeScroll
         }
 
         this.scroll = new BScroll(this.$refs.wrapper, options)
@@ -189,7 +196,8 @@
       scrollToElement () {
         this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
       },
-      clickItem (item) {
+      clickItem (e, item) {
+        console.log(e)
         this.$emit('click', item)
       },
       destroy () {
@@ -269,11 +277,10 @@
       Bubble
     }
   }
-
 </script>
 
 <style scoped lang="less">
-  .list-wrapper{
+  .list-wrapper {
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -281,7 +288,8 @@
       position: relative;
     }
   }
-  .pulldown-wrapper{
+
+  .pulldown-wrapper {
     position: absolute;
     width: 100%;
     left: 0;
@@ -289,11 +297,12 @@
     justify-content: center;
     align-items: center;
     transition: all;
-    .after-trigger{
+    .after-trigger {
       margin-top: 10px
     }
   }
-  .pullup-wrapper{
+
+  .pullup-wrapper {
     width: 100%;
     display: flex;
     justify-content: center;

@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "better-scroll": "^1.2.3",
+    "better-scroll": "^1.2.6",
     "es6-promise": "^4.1.1",
     "fastclick": "^1.0.6",
     "node-vibrant": "^3.0.0-alpha.2",
