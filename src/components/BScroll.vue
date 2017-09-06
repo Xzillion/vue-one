@@ -48,12 +48,68 @@ const DEFAULT_LOAD_TXT_MORE = '加载更多'
 const DEFAULT_LOAD_TXT_NO_MORE = '没有更多数据了'
 const DEFAULT_REFRESH_TXT = '刷新成功'
 
+<<<<<<< HEAD
 export default {
   name: COMPONENT_NAME,
   props: {
     data: {
       type: Array,
       default: []
+=======
+  export default {
+    name: COMPONENT_NAME,
+    props: {
+      data: {
+        type: Array,
+        default: function () {
+          return []
+        }
+      },
+      probeType: {
+        type: Number,
+        default: 1
+      },
+      click: {
+        type: Boolean,
+        default: false
+      },
+      listenScroll: {
+        type: Boolean,
+        default: false
+      },
+      listenBeforeScroll: {
+        type: Boolean,
+        default: false
+      },
+      direction: {
+        type: String,
+        default: DIRECTION_V
+      },
+      scrollbar: {
+        type: null,
+        default: false
+      },
+      pullDownRefresh: {
+        type: null,
+        default: false
+      },
+      pullUpLoad: {
+        type: null,
+        default: false
+      },
+      startY: {
+        type: Number,
+        default: 0
+      },
+      refreshDelay: {
+        type: Number,
+        default: 20
+      },
+      freeScroll: {
+        type: Boolean,
+        default: false
+      }
+>>>>>>> edc1763c0054d89637561a7170ca916b56d19270
     },
     probeType: {
       type: Number,
@@ -112,7 +168,21 @@ export default {
     pullUpTxt() {
       const moreTxt = this.pullUpLoad && this.pullUpLoad.txt && this.pullUpLoad.txt.more || DEFAULT_LOAD_TXT_MORE
 
+<<<<<<< HEAD
       const noMoreTxt = this.pullUpLoad && this.pullUpLoad.txt && this.pullUpLoad.txt.noMore || DEFAULT_LOAD_TXT_NO_MORE
+=======
+        let options = {
+          probeType: this.probeType,
+          click: this.click,
+          scrollY: this.freeScroll || this.direction === DIRECTION_V,
+          scrollX: this.freeScroll || this.direction === DIRECTION_H,
+          scrollbar: this.scrollbar,
+          pullDownRefresh: this.pullDownRefresh,
+          pullUpLoad: this.pullUpLoad,
+          startY: this.startY,
+          freeScroll: this.freeScroll
+        }
+>>>>>>> edc1763c0054d89637561a7170ca916b56d19270
 
       return this.pullUpDirty ? moreTxt : noMoreTxt
     },
@@ -153,9 +223,59 @@ export default {
         })
       }
 
+<<<<<<< HEAD
       if (this.listenBeforeScroll) {
         this.scroll.on('beforeScrollStart', () => {
           this.$emit('beforeScrollStart')
+=======
+        if (this.pullUpLoad) {
+          this._initPullUpLoad()
+        }
+      },
+      disable () {
+        this.scroll && this.scroll.disable()
+      },
+      enable () {
+        this.scroll && this.scroll.enable()
+      },
+      refresh () {
+        this.scroll && this.scroll.refresh()
+      },
+      scrollTo () {
+        this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments)
+      },
+      scrollToElement () {
+        this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
+      },
+      clickItem (e, item) {
+        console.log(e)
+        this.$emit('click', item)
+      },
+      destroy () {
+        this.scroll.destroy()
+      },
+      forceUpdate (dirty) {
+        if (this.pullDownRefresh && this.isPullingDown) {
+          this.pulling = false
+          this._reboundPullDown().then(() => {
+            this._afterPullDown()
+          })
+        } else if (this.pullUpLoad && this.isPullUpLoad) {
+          this.isPullUpLoad = false
+          this.scroll.finishPullUp()
+          this.pullUpDirty = dirty
+          this.refresh()
+        } else {
+          this.refresh()
+        }
+      },
+      _initPullDownRefresh () {
+        this.scroll.on('pullingDown', () => {
+          this.beforePullDown = false
+          this.isPullingDown = true
+          this.pulling = true
+          this.$emit('pullingDown')
+>>>>>>> edc1763c0054d89637561a7170ca916b56d19270
         })
       }
 
@@ -263,6 +383,7 @@ export default {
     Loading,
     Bubble
   }
+<<<<<<< HEAD
 }
 </script>
 
@@ -286,6 +407,39 @@ export default {
   transition: all;
   .after-trigger {
     margin-top: 10px
+=======
+</script>
+
+<style scoped lang="less">
+  .list-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    .list-content {
+      position: relative;
+    }
+  }
+
+  .pulldown-wrapper {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all;
+    .after-trigger {
+      margin-top: 10px
+    }
+  }
+
+  .pullup-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 0;
+>>>>>>> edc1763c0054d89637561a7170ca916b56d19270
   }
 }
 

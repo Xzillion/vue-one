@@ -36,8 +36,7 @@
           fade: true // 是否自动消失
         },
         pullUpLoadObj: { // 是否允许上拉加载更多 可传入对象用于配置上拉距离和加载提示
-          threshold: 100,
-          stop: 100,
+          threshold: 0,
           txt: {
             more: '加载更多',
             noMore: '没有更多数据'
@@ -60,17 +59,18 @@
     },
     methods: {
       getArticleList (sourceTime = new Date()) {
-        this.$store.commit('setLoadState', {loadState:true}) // 正在加载
+        this.$store.commit('setLoadState', true) // 正在加载
         api.getArticleList(sourceTime)// 获取文章列表
           .then((data) => {
             this.sourceTime.setMonth(this.sourceTime.getMonth() - 1) // 获取上一个月的日期
-            this.$store.commit('setLoadState', {loadState:false, delay:0}) // 延迟1s改变状态
+            this.$store.commit('setLoadState', false) // 延迟1s改变状态
             this.$vux.loading.hide()
             this.$refs.scroll.forceUpdate()
             this.articleList.push(...data)
           })
           .catch(() => {
-            this.$store.commit('setLoadState', {loadState:false, delay:0}) // 延迟1s改变状态
+              this.$store.commit('setLoadState', false)
+             // 延迟1s改变状态
             this.$vux.loading.hide()
             this.$refs.scroll.forceUpdate()
             this.$vux.toast.text('数据载入失败', 'middle')
