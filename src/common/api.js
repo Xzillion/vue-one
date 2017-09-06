@@ -26,7 +26,7 @@ const BASE_URL = 'http://v3.wufazhuce.com:8000/api/'
 let api = {
   // 鸡汤相关
   getSoupList: (id = 0) => {// 获取鸡汤列表
-    console.log(this)
+    // console.log(this) this在运行时指向了一个全局对象，不能用this来调用api对象的方法
     return api.requestHandler.get(`${BASE_URL}hp/idlist/${id}`)
   },
   getSoupDetail: (id = 0) => {// 获取鸡汤详情
