@@ -4,7 +4,7 @@
     <div>
       <slot name="scroll-content" class="list-content">
         <ul class="list-content">
-          <li @click="clickItem(item)" class="list-item" v-for="item in data">{{item}}</li>
+          <li @click="clickItem(item)" class="list-item" v-for="(item, index) in data" :key="index">{{item}}</li>
         </ul>
       </slot>
       <slot name="pullup"
