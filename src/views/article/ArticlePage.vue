@@ -32,7 +32,7 @@
     data () {
       return {
         articleList: [], // 鸡汤列表
-        scrollBarObj: { //滚动条属性
+        scrollBarObj: { // 滚动条属性
           fade: true // 是否自动消失
         },
         pullUpLoadObj: { // 是否允许上拉加载更多 可传入对象用于配置上拉距离和加载提示
