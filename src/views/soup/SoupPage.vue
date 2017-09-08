@@ -20,7 +20,7 @@
   </div>
 </template>
 
-<script type="es6">
+<script>
   import BScroll from '../../components/BScroll.vue'
   import CoverImage from '../../components/CoverImage.vue'
   import api from '../../common/api'

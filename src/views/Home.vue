@@ -43,7 +43,7 @@
   </div>
 </template>
 
-<script type="es6">
+<script>
   import {Drawer, XHeader, ViewBox} from 'vux'
   import CoverImage from '../components/CoverImage'
   import BScroll from '../components/BScroll'

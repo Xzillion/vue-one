@@ -9,7 +9,7 @@
   </div>
 </template>
 
-<script type="es6">
+<script>
   export default {
     name: 'article-item',
     props: {
