@@ -1,4 +1,4 @@
-// 文章['p
+// 文章
 <template>
   <div class="article-item">
     <img class="author-avatar" :src="authorAvatar"/><span class="author-name">{{authorName}}</span>
