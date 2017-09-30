@@ -19,12 +19,10 @@
   </div>
 </template>
 
-<script type="es6">
+<script>
   import BScroll from '../../components/BScroll.vue'
   import ArticleItem from '../../components/ArticleItem.vue'
   import api from '../../common/api'
-  import { dateFormat } from 'vux'
-  import Vue from 'vue'
   import {mapMutations} from 'vuex'
 
   export default {
@@ -32,7 +30,7 @@
     data () {
       return {
         articleList: [], // 鸡汤列表
-        scrollBarObj: { //滚动条属性
+        scrollBarObj: { // 滚动条属性
           fade: true // 是否自动消失
         },
         pullUpLoadObj: { // 是否允许上拉加载更多 可传入对象用于配置上拉距离和加载提示
@@ -69,7 +67,7 @@
             this.articleList.push(...data)
           })
           .catch(() => {
-              this.$store.commit('setLoadState', false)
+            this.$store.commit('setLoadState', false)
              // 延迟1s改变状态
             this.$vux.loading.hide()
             this.$refs.scroll.forceUpdate()
@@ -81,7 +79,7 @@
       },
       ...mapMutations([
         'setHeaderTitle'
-      ]),
+      ])
     }
   }
 </script>

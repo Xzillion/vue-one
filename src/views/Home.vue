@@ -43,11 +43,11 @@
   </div>
 </template>
 
-<script type="es6">
+<script>
   import {Drawer, XHeader, ViewBox} from 'vux'
   import CoverImage from '../components/CoverImage'
   import BScroll from '../components/BScroll'
-  import {mapState, mapMutations, mapActions} from 'vuex'
+  import {mapState} from 'vuex'
 
   export default {
     name: 'home',
@@ -58,10 +58,10 @@
       ViewBox,
       BScroll
     },
-    created() {
+    created () {
       this.$store.dispatch('initSwatch') // 发出初始化swatch请求
     },
-    data() {
+    data () {
       return {
         leftOptions: {
           showBack: false,
@@ -97,9 +97,9 @@
       }
     },
     methods: { // 事件
-     changeRoute () {
+      changeRoute () {
         this.showDrawer = !this.showDrawer
-     }
+      }
     },
     computed: {
       ...mapState({

@@ -20,12 +20,11 @@
   </div>
 </template>
 
-<script type="es6">
+<script>
   import BScroll from '../../components/BScroll.vue'
   import CoverImage from '../../components/CoverImage.vue'
   import api from '../../common/api'
-  import Vue from 'vue'
-  import {mapState, mapMutations} from 'vuex'
+  import {mapMutations} from 'vuex'
 
   export default {
     name: 'soup-page',
@@ -65,7 +64,7 @@
           .then((data) => {
             this.$store.commit('setLoadState', false)
             this.$vux.loading.hide()
-            if (soupId != 0) {
+            if (soupId !== 0) {
               this.$refs.scroll.forceUpdate()
             }
             this.soupList.push(...data)
@@ -73,7 +72,7 @@
           .catch(() => {
             this.$store.commit('setLoadState', false)
             this.$vux.loading.hide()
-            if (soupId != 0) {
+            if (soupId !== 0) {
               this.$refs.scroll.forceUpdate()
             }
             this.$vux.toast.text('数据载入失败', 'middle')
