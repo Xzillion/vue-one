@@ -57,12 +57,12 @@
     },
     methods: {
       getArticleList (sourceTime = new Date()) {
-        this.$store.commit('setLoadState', true) // 正在加载
+        this.$store.commit('setLoadState', true) // 正在加载EE
         api.getArticleList(sourceTime)// 获取文章列表
           .then((data) => {
             this.sourceTime.setMonth(this.sourceTime.getMonth() - 1) // 获取上一个月的日期
             this.$store.commit('setLoadState', false) // 延迟1s改变状态
-            this.$vux.loading.hide()
+            this.$vux.loading.hide(``)
             this.$refs.scroll.forceUpdate()
             this.articleList.push(...data)
           })
